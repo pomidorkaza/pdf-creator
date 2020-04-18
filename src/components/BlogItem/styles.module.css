@@ -1,0 +1,51 @@
+ 
+  .blog-item{
+  width: 100%;
+  background: #f2f2f2;
+     
+  
+  }
+  .blog-item-top {
+    display:flex;  
+     height: 56px;
+    padding: 0 15px;
+    line-height:56px;
+}
+.blog-item-top-item--last{
+    flex:1;
+    text-align: end;
+}
+
+.blog-item-date{
+    margin: 0 5px 0 0;
+    font-size: 1.2rem;
+}
+.blog-item-author{
+    font-size: 1.4rem;
+}
+.blog-item-answer-wrapper{
+    width: 90%;
+    margin: 0 auto;
+} 
+.blog-item-btn{
+    width: 234px;
+    display: inline-block;
+    height: 64px;
+    line-height: 64px;
+    font-size: 1.2rem;
+ }
+.blog-item-answer{
+    transition: all  .5s;
+    opacity: 0;
+    transform: translateY(-100%);
+    }
+.blog-item-answer-on{
+    transform: translateY(0);
+    opacity: 1;
+    transition: all .5s;
+
+}
+.blog-item-top-item{
+    display: flex;
+}
+    

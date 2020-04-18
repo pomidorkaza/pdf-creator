@@ -1,0 +1,29 @@
+
+
+.form{
+    width: 400px;
+}
+
+.form-btn{
+    width: 164px;
+    height: 66px;
+    margin: 20px auto 0 0;
+    line-height: 66px;
+}
+.wrapper-textarea{
+    background-color: #fff;
+    border: 1px solid #eee;
+}
+.textarea{  width: 100%;
+    padding: 0 0;
+    font-size: 52px;
+    font-family: 'Open Sans Condensed', arial, sans-serif;
+    font-weight: bold;
+    color: #282b2d;
+    border: 0;
+    height: 260px;
+    outline: none;
+    position: relative;
+    margin-top: -14px;
+    background: transparent;
+}
