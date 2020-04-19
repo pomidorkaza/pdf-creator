@@ -1,59 +1,69 @@
 import React,{useState , useEffect ,useRef} from 'react';
 import axios from 'axios';
+import cx from 'classnames';
+import styles from './styles.module.css';
 import {BlogContainerWithButtons} from '../../components/BlogContainerWithButtons';
 import pdfjs from 'pdfjs-dist';
 import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.entry';
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
-export const PdfContainer =()=>{
-    const [pdfData, setPdfData] = useState(null);
-    const [isLoading, setLoading] = useState(true);
+
+export const PdfContainer =({style,isLoadingPdf,currentNews, className, type,...restProps})=>{
+    
     const divContainer = useRef(null);
-    useEffect(() => {
+
+    const [pdf, setPdf] = useState(null);
+    
+    function renderPage(page){
+        let scale = 1;
+        let viewport = page.getViewport({scale: scale});
         
-        axios.post('http://localhost:5000/pdf/3')
-        .then(res=>{
-            if(res.status==200)
-            {  
-                pdfjs.getDocument({data:atob(res.data.data)})
-                .promise
-                .then((pdf)=>{
-                    
-                        pdf.getPage(1).then(function(page) {
-                            console.log('Page loaded');
-                            
-                            let scale = 1.5;
-                            let viewport = page.getViewport({scale: scale});
+        let newCanvas = document.createElement('canvas');
 
-                            
-                            let newCanvas = document.createElement('canvas');
+        let canvas = newCanvas;
+        
+        const context = canvas.getContext('2d');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        const renderContext = {
+        canvasContext: context,
+        viewport: viewport
+        };
+        divContainer.current.appendChild(canvas);
 
-                            let canvas = newCanvas;
-
-                            var context = canvas.getContext('2d');
-                            canvas.height = viewport.height;
-                            canvas.width = viewport.width;
-                            let renderContext = {
-                            canvasContext: context,
-                            viewport: viewport
-                            };
-                            divContainer.current.appendChild(canvas);
-
-                            let renderTask = page.render(renderContext);
-                            renderTask.promise.then(function () {
-                            console.log('Page rendered');
-                            });
-    });
-                })
-
-            }
-
+        const renderTask = page.render(renderContext);
+        renderTask.promise.then( ()=>{
+        console.log('Page rendered');
+        });
+    }
+    
+        useEffect(() => {
             
-        })
-        .catch(err=>console.log(err));        
-    }, []);
+                if(currentNews)
+                    pdfjs.getDocument(process.env.PUBLIC_URL+'/upload/tmp/'+currentNews.pdf_data)
+                    .promise
+                    .then((_pdf)=>{
+                            setPdf(_pdf);
+                });
 
-    return(<BlogContainerWithButtons > 
-        <div ref={divContainer} >
-            </div></BlogContainerWithButtons>);
+
+    }, [currentNews]);
+
+    useEffect(()=>{
+        if(pdf){
+            pdf.getPage(1).then(function(page){
+                renderPage(page);
+            } ) 
+        }
+            
+    },[pdf]);
+
+    return(<BlogContainerWithButtons 
+        className={cx(styles['pdf-container'],className)} 
+        style={style}
+        
+    {...restProps}
+    > 
+      {!isLoadingPdf &&<div ref={divContainer} >
+            </div>}</BlogContainerWithButtons>);
 }

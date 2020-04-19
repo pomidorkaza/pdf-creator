@@ -1,0 +1,25 @@
+
+.back-container{
+    width: 80%;
+    margin: 15px auto 0 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.back-container-btn{
+    width: 164px;
+    height: 64px;
+    line-height: 64px;
+}
+.back-container-text{
+    margin: 0 auto 0 15px;
+}
+
+.detailnews-page-item{
+    width: 80%;
+    margin: 15px;
+}
+.news-page-container{
+    margin: 15px;
+    display: none;
+}

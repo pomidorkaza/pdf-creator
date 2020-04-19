@@ -13,6 +13,7 @@ export const AnswersPage=({isLoading,blogs})=>{
         <div className={styles['back-container']} > 
             <Button className={styles['back-container-btn']} 
             onClick={(e)=>history.goBack()}
+            type="primary"
             >Назад</Button>
             <h2 className={styles['back-container-text']}>Ответы Директору</h2>
             </div>

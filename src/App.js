@@ -1,23 +1,28 @@
 import React, { useState, useEffect,useRef, Component, Fragment } from 'react';
-import { Provider } from 'react-redux';
+ 
+
 import axios from 'axios';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  NavLink
 } from "react-router-dom";
 
 import {AnswersPage} from './pages/answers';
-import {BlogItem} from './components/BlogItem'; 
-import {BlogContainer} from './components/BlogContainer';
+import {NewsDetailPage} from './pages/detailnews';
+import {UserInfoPage} from './pages/userinfopage';
 import {Form} from './components/Form';
-import {BlogContainerWithButtons} from './components/BlogContainerWithButtons';
-import {PdfContainer} from './components/PdfContainer';
+import { TopNews } from './components/TopNews';
 
+
+import './App.css';
 function App(){
+
   const [blogs,setBlogs] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [topNews, setTopNews] = useState([]);
 
   useEffect(()=>{
   axios.get('http://localhost:5000/allquestions')
@@ -26,12 +31,34 @@ function App(){
     setLoading(false);
   })
   .catch(err=>console.log(err));
+
 },[]);
+
+useEffect(()=>{
+  axios.get('http://localhost:5000/news')
+  .then((res)=>{
+    if(res.status==200){
+      setTopNews(res.data.results);
+    }  
+  })
+  .catch((err)=>{
+    console.log(err);
+  })
+},[]);
+
   return (
 <Router> 
+  <header>
+    <ul>
+    <li><NavLink to="/">Главная страница</NavLink></li>
+    <li><NavLink to="/answers">Страница вопросов</NavLink></li>
+    </ul>
+  </header>
 <Switch>
 <Route path="/" exact>
-  <h3>Main page</h3>
+  <h3>Главная страница</h3>
+  <TopNews />
+  
 </Route>
 
 <Route path="/answers" exact>
@@ -40,13 +67,16 @@ function App(){
   />
 </Route>
 <Route path="/pdf" exact>
-  <PdfContainer/>
+  <UserInfoPage/>
+</Route>
+<Route path="/docs/:id" exact>
+  <NewsDetailPage/>
 </Route>
 </Switch>  
- 
+
 
   {/* <Form style={{marginTop:'1rem'}}/> */}
- 
+
     </Router>
   );
 }
