@@ -22,7 +22,7 @@ export const TopNews=({style, className,  ...restProps})=> {
     return (
         <div  className={cx(styles['news-container'],className)} 
         style={style}
-    {...restProps}> 
+            {...restProps}> 
 <div className={styles['top-news']}>Главные новости</div> 
         {
             topNews.map((item,index)=>{

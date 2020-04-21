@@ -1,6 +1,5 @@
 import React, { useState, useEffect,useRef, Component, Fragment } from 'react';
- 
-
+import {useDispatch} from 'react-redux';
 import axios from 'axios';
 import {
   BrowserRouter as Router,
@@ -10,12 +9,18 @@ import {
   NavLink
 } from "react-router-dom";
 
+
 import {AnswersPage} from './pages/answers';
 import {NewsDetailPage} from './pages/detailnews';
 import {UserInfoPage} from './pages/userinfopage';
+import {AllNewsPage} from './pages/allnewspage';
+
+import {LoginForm} from './components/LoginForm';
 import {Form} from './components/Form';
 import { TopNews } from './components/TopNews';
 
+ import {ProtectedRoute} from './components/ProtectedRoute';
+import {getTopNewsAsync} from './actions';
 
 import './App.css';
 function App(){
@@ -23,7 +28,10 @@ function App(){
   const [blogs,setBlogs] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [topNews, setTopNews] = useState([]);
-
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(getTopNewsAsync());
+},[]);
   useEffect(()=>{
   axios.get('http://localhost:5000/allquestions')
   .then(res=>{
@@ -55,19 +63,28 @@ useEffect(()=>{
     </ul>
   </header>
 <Switch>
-<Route path="/" exact>
+ <Route path="/" exact>
   <h3>Главная страница</h3>
   <TopNews />
-  
+
 </Route>
+
+<Route path="/login" exact>
+<LoginForm/>  
+</Route>
+<ProtectedRoute path="/protected" exact 
+component={()=><AnswersPage isLoading={isLoading}
+  blogs={blogs}/>}>
+   
+  </ProtectedRoute>
 
 <Route path="/answers" exact>
   <AnswersPage isLoading={isLoading}
   blogs={blogs}
   />
 </Route>
-<Route path="/pdf" exact>
-  <UserInfoPage/>
+<Route path="/docs" exact>
+   <AllNewsPage/>
 </Route>
 <Route path="/docs/:id" exact>
   <NewsDetailPage/>

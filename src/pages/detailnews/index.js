@@ -37,12 +37,12 @@ export const NewsDetailPage=({isLoading,blogs})=>{
             onClick={(e)=>history.goBack()}
             type="primary"
             >Назад</Button>
-            <h2 className={styles['back-container-text']}>{}</h2>
+            <h2 className={styles['back-container-text']}>{currentNews?currentNews.title:""}</h2>
             </div>
             <PdfContainer  id={id} 
             currentNews={currentNews}
             isLoadingPdf={isLoadingPdf}
-            
+
             >
 
             </PdfContainer> 

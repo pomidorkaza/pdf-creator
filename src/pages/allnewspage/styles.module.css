@@ -1,0 +1,78 @@
+.back-container{
+    width: 80%;
+    margin: 15px auto 0 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.back-container-btn{
+    width: 164px;
+    height: 64px;
+    line-height: 64px;
+}
+.back-container-text{
+    margin: 0 auto 0 15px;
+}
+
+
+.grid-container {
+    display: grid;
+    width: 450px;
+    margin: 15px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1px 1px;
+    grid-template-areas: "one two three four" "five six seven eight" ". . . .";
+}
+.grid-container-item{
+    display: inline-block;
+    width: 204px;
+    padding: 40px 25px 25px;
+    height: 261px;
+    background: var(--primary-bg-color);
+    -webkit-box-shadow: 0 0 32px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 32px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 32px rgba(0, 0, 0, 0.2);
+    margin: 0 15px 15px 0;
+    text-decoration: none;
+     text-align: center;
+    vertical-align: top;
+    border-radius: 3px;
+}  
+    .item-1 { grid-area: one; }
+  
+  .item-2 { grid-area: two; }
+  
+  .item-3 { grid-area: three; }
+  
+  .item-4 { grid-area: four; }
+  
+  .item-5 { grid-area: five; }
+  
+  .item-6 { grid-area: six; }
+  
+  .item-7 { grid-area: seven; }
+  
+  .item-8 { grid-area: eight; }
+
+
+.grid-container-item-txt{
+
+    display: block;
+    color: #282b2d;
+    text-decoration: none;
+    font-family: 'Open Sans Condensed', arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 24px;
+}
+.grid-container-item-icon{
+    
+    text-align: center;
+    height: 80px;
+    width: 80px;
+    margin: 0 auto 20px;
+    background-position: center center;
+    background-repeat: no-repeat;
+     background-size: 100% 100%;
+}
