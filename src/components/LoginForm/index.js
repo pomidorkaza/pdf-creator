@@ -17,14 +17,14 @@ const Input =({
     isBlured,
     labelField,
         ...restProps})=>{
-    
-    return   <div className={cx(styles['form-container-item'],
+            console.log(isBlured);
+    return   <div className={cx(className,
                     isBlured && (isValid? "":styles['input-error'])) }
     
     >
     <label className={styles['form-container-item-label']}>
            {labelField}
-    </label> <input className={className}
+    </label> <input className={styles['input-field']}
                 
                 value={FormFieldObj.value}
                 name={FormFieldObj.name}
@@ -44,7 +44,7 @@ const Input =({
 };
 
 export const LoginForm = ()=>{
-    
+
     const [formData, setFormData] = useState({
 
         PIN:{
@@ -63,16 +63,12 @@ export const LoginForm = ()=>{
     
     const HandleSubmit=(e)=>{
         e.preventDefault();
-
     }
-    const onHandleChange=({name, value, validators,isBlured })=>{
-        
-        let  totalValidity = allValidity( validators.map((item)=> checkValidity({
+    const onHandleChange=({name, value, validators})=>{
+            let  totalValidity = allValidity( validators.map((item)=> checkValidity({
                 validatorType:item,
                 value:value
-            })));
-        
-
+            })));        
         setFormData((prevState)=>{
             return {
                 ...prevState,
@@ -85,37 +81,42 @@ export const LoginForm = ()=>{
         });
         console.log(formData);
     }
+
+    const blurHandler=(field_param)=>{
+        setFormData({...formData,
+            [field_param]:{...formData[field_param],
+                                isBlured:true,}})   
+    }
+    const transferFields= (field_param)=>{
+            return {
+                isValid:formData[field_param].isValid,
+                isBlured:formData[field_param].isBlured,
+                FormFieldObj:{
+                            name: field_param,
+                            value: formData[field_param].value
+                }
+            }
+    }
+
     return <form className={styles['form-container']} onSubmit={(e)=>HandleSubmit(e)}>
-            
-               
                     <Input  
-                        onBlur={(e)=>{
-                                setFormData({...formData,
-                                    PID:{
-                                        ...formData.PID,
-                                        isBlured:true,
-
-                                    }
-                                })    
-                        }}
-
-                        className={styles['form-container-item-input']}
+                        onBlur={(e)=>{blurHandler("PID")}}
+                        className={styles['form-container-item']}  
                         validators={["LENGTH", "MIN_LENGTH"]}
                         labelField="Введите PID"
-                        onHandleChange={onHandleChange}
-                        isValid ={formData.PID.isValid}
-                        isBlured={formData.PID.isBlured}
-                        FormFieldObj={{
-                            name: "PID",
-                            value: formData["PID"].value}}
-                    />
-                    {/* <input type="text"
-                            value={PIN}
-                            onChange={(e)=>HandleChange(e)}
-                            className={styles['form-container-item-input']} 
-                            name="PIN"
-                            /> */}
-   
+                        onHandleChange = {onHandleChange}
+                            {...transferFields("PID")}
+                        />
+                        <Input 
+                    
+                        onBlur={(e)=>{blurHandler("PIN")}}
+                        className={styles['form-container-item']}  
+                        validators={["LENGTH", "MIN_LENGTH"]}
+                        labelField="Введите PIN"
+                        onHandleChange = {onHandleChange}
+                            {...transferFields("PIN")}
+                        />
+
                 <div className={styles['form-container-item__last']} >
                     <Button type="primary">Подтвердить</Button>
                 </div>
