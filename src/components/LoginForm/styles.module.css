@@ -18,24 +18,8 @@
     font-weight: bold;
 }
 
-.input-field{
-    width: 100%;
-    padding: 0 0;
-    font-size: 52px;
-    font-family: 'Open Sans Condensed', arial, sans-serif;
-    font-weight: bold;
-    color: #282b2d;
-    border: 0;
-    outline: none;
-    position: relative;
-    margin-top: -14px;
-    background: transparent;
-}
-.textarea-field-wrapper{
-    background-color: #fff;
-    
-    border: 1px solid #eee;
-}
+ 
+ 
 .textarea-field{
     width: 100%;
     padding: 0 0;
@@ -54,14 +38,4 @@
 .form-container-item__last{
     margin-top: 6rem;
 }
-.input-error{
-    border: 3px solid var( --errors-msg-color);
-}
-.error-container{
-    display: flex;
-    flex-flow: column;
-}
-.message-error{
-    font-size: 1.2rem;
-    color: var(--errors-msg-color);
-}
+ 

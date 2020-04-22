@@ -1,0 +1,52 @@
+
+.input-field{
+    width: 100%;
+    padding: 0 0;
+    font-size: 52px;
+    font-family: 'Open Sans Condensed', arial, sans-serif;
+    font-weight: bold;
+    color: #282b2d;
+    border: 0;
+    outline: none;
+    position: relative;
+    margin-top: -14px;
+    background: transparent;
+}
+.wrapper-textarea-wrapper{
+    
+    background-color: #fff;
+    border: 1px solid #eee;
+}
+.textarea-field{
+    
+    width: 100%;
+    background-color: #fff;
+    padding: 0 0;
+    font-size: 52px;
+    font-family: 'Open Sans Condensed', arial, sans-serif;
+    font-weight: bold;
+    color: #282b2d;
+    border: 0;
+    height: 260px;
+    outline: none;
+    position: relative;
+    margin-top: -14px;
+    background: transparent;
+}
+.label-field{
+    font-size: 14px;
+    font-family: 'Open Sans Condensed', arial, sans-serif;
+    font-weight: bold;
+}
+.error-container{
+    display: flex;
+    flex-flow: column;
+}
+.message-error{
+    font-size: 1.2rem;
+    color: var(--errors-msg-color);
+}
+
+.input-wrapper.input-wrapper-second.input-error{
+    border-color:  var(--errors-msg-color);
+}
