@@ -2,6 +2,8 @@
 :root{
   --primary-color: #31a8dc;
   --primary-bg-color: #fff;
+  --errors-msg-color:  rgb(204, 28, 28);
+   --second-text-color:#282b2d;
 }
 *{
   box-sizing: border-box;

@@ -1,3 +1,5 @@
+import { act } from "react-dom/test-utils";
+
 const initialState ={
     user:{
         name:"Bob",
@@ -10,7 +12,11 @@ const initialState ={
 function mainReducer(state = initialState, action ){
 
     switch (action.type){
-        
+        case 'CHECK_REG':
+            console.log(action.payload);
+            return {
+                ...state,
+            }
         case 'CHECK_AUTH':
             const {name, password} = action.payload;
             let isAuthorised = false;

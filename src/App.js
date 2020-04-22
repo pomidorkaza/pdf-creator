@@ -70,7 +70,8 @@ useEffect(()=>{
 </Route>
 
 <Route path="/login" exact>
-<LoginForm/>  
+
+<LoginForm/>   
 </Route>
 <ProtectedRoute path="/protected" exact 
 component={()=><AnswersPage isLoading={isLoading}

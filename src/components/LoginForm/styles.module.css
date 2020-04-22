@@ -1,5 +1,5 @@
 .form-container{
-    width: 400px;
+    width: 425px;
     display: flex;
     flex-flow: column;
     
@@ -31,9 +31,34 @@
     margin-top: -14px;
     background: transparent;
 }
+.textarea-field-wrapper{
+    background-color: #fff;
+    
+    border: 1px solid #eee;
+}
+.textarea-field{
+    width: 100%;
+    padding: 0 0;
+    font-size: 52px;
+    font-family: 'Open Sans Condensed', arial, sans-serif;
+    font-weight: bold;
+    color: var(--second-text-color);
+    border: 0;
+    height: 260px;
+    outline: none;
+    position: relative;
+    margin-top: -14px;
+    background: transparent;
+}
+
 .form-container-item__last{
     margin-top: 6rem;
 }
 .input-error{
-    border: 3px solid rgb(204, 28, 28);
+    border: 3px solid var( --errors-msg-color);
+}
+
+.message-error{
+    font-size: 1.2rem;
+    color: var(--errors-msg-color);
 }

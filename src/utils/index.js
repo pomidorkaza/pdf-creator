@@ -1,6 +1,20 @@
 
 
 //проверяем  массив валидных полей 
+
+
+export function errorMessage(word){
+        switch (word){
+            case "MIN_LENGTH":{
+                return "Поле не должно быть меньше 6 символов";
+            }
+            case "REQUIRED":{
+                return "Поле не должно быть пустым";
+            }
+            default:
+                return "";
+        }
+}
 export function allValidity(array_of_fields){
     
     let validchekcer = array_of_fields[0] && true;
