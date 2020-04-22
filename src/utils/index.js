@@ -1,14 +1,15 @@
 
 
 //проверяем  массив валидных полей 
-
+const MAX_LENGTH = "MAX_LENGTH";
+const REQUIRED ="REQUIRED";
 
 export function errorMessage(word){
         switch (word){
-            case "MIN_LENGTH":{
+            case MAX_LENGTH:{
                 return "Поле не должно быть меньше 6 символов";
             }
-            case "REQUIRED":{
+            case REQUIRED:{
                 return "Поле не должно быть пустым";
             }
             default:
@@ -28,9 +29,9 @@ export function allValidity(array_of_fields){
 export function checkValidity(field){
 
             switch (field.validatorType){
-                case 'MIN_LENGTH':
-                    return field.value.length>=6;
-                case 'REQUIRED':
+                case MAX_LENGTH:
+                    return field.value.length>=6 &&field.value.length<=30;
+                case REQUIRED:
                     return field.value.trim()!=="";
                     default:
                         return true;

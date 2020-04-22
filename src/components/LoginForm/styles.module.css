@@ -57,7 +57,10 @@
 .input-error{
     border: 3px solid var( --errors-msg-color);
 }
-
+.error-container{
+    display: flex;
+    flex-flow: column;
+}
 .message-error{
     font-size: 1.2rem;
     color: var(--errors-msg-color);

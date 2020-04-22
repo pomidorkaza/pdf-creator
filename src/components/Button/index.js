@@ -13,14 +13,7 @@ function themeInjection(type){
         }
 
     } 
-    else if(type == "disabled") {
-        return {
-            color: '#282d2b',
-            opacity:'0.3',
-            background:  'none',
-            boxShadow:'0 11px 20px rgba(0, 0, 0, 0.24)'
-        }
-    }
+    
     else if(type == "submit"){
         return {
             color: '#fff',
