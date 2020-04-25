@@ -14,8 +14,8 @@ export const BlogContainer = ({style,children,  className, ...restProps}) => {
     const container = useRef(null);
     
     return (
- <>
- 
+<>
+
         
         <div ref={container} className={cx(styles['container'],className)} 
         
@@ -23,8 +23,7 @@ export const BlogContainer = ({style,children,  className, ...restProps}) => {
         
             {children}
         </div>
-        <ScrollHandler
-    container={container}/> 
-   </>
-      )
+        <ScrollHandler  container={container}/> 
+</>
+);
 }

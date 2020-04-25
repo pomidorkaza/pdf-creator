@@ -1,6 +1,8 @@
 import React, { useState, Fragment, useCallback ,useReducer ,useEffect } from 'react';
 import {useDispatch, useSelector } from 'react-redux';
 
+import {useForm} from '../../hooks/FormHook';
+
 import {Input} from '../Input';
 import cx from 'classnames';
 import {Button} from '../../components/Button';
@@ -9,57 +11,23 @@ import axios from 'axios';
 import {asyncCheckRegistrationUser} from '../../actions';
 
 
+ 
 
 export const LoginForm = ({style, className, type, children,
     ...restProps})=>{
     
     
-    const [formData, setFormData] = useState({
-    inputs:{
+    const [formData, onInputTrigger] = useForm({
+        PID:{
+            value:"",
+            isValid:false
+        },
         PIN:{
             value:"",
-            isValid: false,
-        },
-        PID:{
-            value: "",
-            isValid:false,
-        },
-    },
-isValid: false,
-
-    });
-        
-    const onInputTrigger = useCallback((id,value,isValid)=>{
-
-        setFormData((prevState)=>{
-                    
-                return {
-                    ...prevState,
-                    inputs:{
-                        ...prevState.inputs,
-                    [id]:{
-                        ...prevState.inputs[id],
-                        value: value,
-                        isValid: isValid
-                    }  
-                    }
-            
-                }
-        });
-
-    setFormData((prevState)=>{
-        let totalValidity = true;
-        for(let currentId in prevState.inputs){
-            if( !prevState.inputs[currentId].isValid){
-                totalValidity = false;
-            }
+            isValid: false
         }
-        return {
-            ...prevState,
-            isValid: totalValidity
-        }
-    })        
-},[setFormData]);
+    },true);
+
     return <form 
     className={cx(styles['form-container'],className)} 
             style={style}     

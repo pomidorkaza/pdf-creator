@@ -18,7 +18,7 @@ import {AllNewsPage} from './pages/allnewspage';
 import {LoginForm} from './components/LoginForm';
 import {Form} from './components/Form';
 import { TopNews } from './components/TopNews';
-
+import {MainRigthMenu} from './components/MainMenuContainer';
  import {ProtectedRoute} from './components/ProtectedRoute';
 import {getTopNewsAsync} from './actions';
 
@@ -32,6 +32,16 @@ function App(){
   useEffect(()=>{
     dispatch(getTopNewsAsync());
 },[]);
+
+
+
+
+
+  useEffect(()=>{
+    axios.get(process.env.REACT_APP_SERVER_PATH+'/api/')
+     console.log(process.env.REACT_APP_SERVER_PATH);
+  },[]);
+
   useEffect(()=>{
   axios.get('http://localhost:5000/allquestions')
   .then(res=>{
@@ -65,15 +75,20 @@ useEffect(()=>{
 <Switch>
  <Route path="/" exact>
   <h3>Главная страница</h3>
-  <TopNews />
-
+  <div style={{    display:'flex',
+    justifyContent:'space-around',
+    alignItems: 'stretch',
+    margin:'0 auto'}}>
+    <TopNews className="top-news" />
+  <MainRigthMenu/>
+</div>
 </Route>
 
 <Route path="/login" exact>
 
 <LoginForm/>   
 </Route>
-<ProtectedRoute path="/protected" exact 
+ <ProtectedRoute path="/protected" exact 
 component={()=><AnswersPage isLoading={isLoading}
   blogs={blogs}/>}>
    
@@ -84,10 +99,13 @@ component={()=><AnswersPage isLoading={isLoading}
   blogs={blogs}
   />
 </Route>
-<Route path="/docs" exact>
+{/* <Route path="/docs" exact>
    <AllNewsPage/>
+</Route> */}
+<Route path="/:pathName" exact>
+<AllNewsPage/>
 </Route>
-<Route path="/docs/:id" exact>
+<Route path="/:pathName/:id" exact>
   <NewsDetailPage/>
 </Route>
 </Switch>  

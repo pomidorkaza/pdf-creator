@@ -43,8 +43,7 @@ function addReducer(state = initialState, action){
                 
                 }
             }
-           
-            
+        
             default:
                 return state;    
     }

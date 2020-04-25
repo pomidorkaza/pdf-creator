@@ -5,15 +5,28 @@ const initialState ={
         name:"Bob",
         password:"1234"
     },
+    allRightNews: [],
     isAuthorised: false,
     topNews: [],
+    filteredPdfsCards:[]
 };
 
 function mainReducer(state = initialState, action ){
 
     switch (action.type){
+        case 'LOAD_FILTER_PDF_CARDS':
+         return {
+                ...state,
+                filteredPdfsCards:[...action.payload]  
+            }
+        case 'LOAD_ALL_RIGHT_MENU_ITEMS':
+
+        return {
+                ...state,
+                allRightNews:[...action.payload.data]
+
+            };
         case 'CHECK_REG':
-            console.log(action.payload);
             return {
                 ...state,
             }

@@ -14,20 +14,27 @@ import styles from './styles.module.css';
 
 export const NewsDetailPage=({isLoading,blogs})=>{
     const history = useHistory()
-    let { id } = useParams();
+    
+    const {id, pathName} = useParams();
+
     const [isLoadingPdf,setLoading] = useState(true);
     const [currentNews,setCurrentNews] = useState(null);
-
+    const [isError, setError] = useState(false);
     useEffect(()=>{
-        axios.get(`http://localhost:5000/news/${id||0}`)
+
+        setLoading(true);
+        axios.get(`${process.env.REACT_APP_SERVER_PATH}/api/${pathName}/${id}`)
         .then((res)=>{
-            console.log(res.data[0]);
-            setCurrentNews(res.data[0]);
+            setCurrentNews(res.data);
+            setError(false);
             setLoading(false);
         })
-        .catch(err=>{
-            console.log(err);
-        })
+        .catch((err)=>{
+                
+            setError(true);
+        });
+        
+        
 
     },[]);
 
@@ -39,12 +46,11 @@ export const NewsDetailPage=({isLoading,blogs})=>{
             >Назад</Button>
             <h2 className={styles['back-container-text']}>{currentNews?currentNews.title:""}</h2>
             </div>
-            <PdfContainer  id={id} 
-            currentNews={currentNews}
-            isLoadingPdf={isLoadingPdf}
-
+            {!isError &&!isLoading &&<PdfContainer  id={id} 
+                currentNews={currentNews}
+                isLoadingPdf={isLoadingPdf}
             >
-
             </PdfContainer> 
+            }
             </div>;
 };

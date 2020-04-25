@@ -11,9 +11,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 export const PdfContainer =({style,isLoadingPdf,currentNews, className, type,...restProps})=>{
     
     const divContainer = useRef(null);
-
     const [pdf, setPdf] = useState(null);
-    
     function renderPage(page){
         let scale = 1;
         let viewport = page.getViewport({scale: scale});
@@ -37,16 +35,17 @@ export const PdfContainer =({style,isLoadingPdf,currentNews, className, type,...
         });
     }
     
-        useEffect(() => {
-            
-                if(currentNews)
-                    pdfjs.getDocument(process.env.PUBLIC_URL+'/upload/tmp/'+currentNews.pdf_data)
+        useEffect(() => {  
+                if(currentNews && currentNews.pdf_path_name){   
+                    pdfjs.getDocument(process.env.PUBLIC_URL+'/upload/tmp/'+currentNews.pdf_path_name)
                     .promise
                     .then((_pdf)=>{
                             setPdf(_pdf);
                 });
 
+            }
 
+        
     }, [currentNews]);
 
     useEffect(()=>{
@@ -64,6 +63,6 @@ export const PdfContainer =({style,isLoadingPdf,currentNews, className, type,...
         
     {...restProps}
     > 
-      {!isLoadingPdf &&<div ref={divContainer} >
-            </div>}</BlogContainerWithButtons>);
+       <div ref={divContainer} >
+            </div></BlogContainerWithButtons>);
 }
